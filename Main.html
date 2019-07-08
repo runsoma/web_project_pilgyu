@@ -1,73 +1,165 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml">
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<title>숨좀쉬자</title>
-<script src="http://code.jquery.com/jquery-latest.min.js"
-	type="text/javascript"></script>
-<head>
-<meta charset="UTF-8">
-	<title>숨좀쉬자</title>
-	<style>
-header {
-	height: 100px;
-	background-color: #81BEF7;
-}
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>숨좀쉬자</title>
+    <script type="text/javascript" src="http://code.jquery.com/jquery-1.8.1.min.js"></script>
+    <script>
+      $(document).ready(function() {
+        $("#siteMapBtn").toggle(
+          function() {
+            $("#B").css({ left: 200 })
+          },
+          function() {
+            $("#B").css({ left: 0 })
+          }
+        )
+      })
+      function btnClick(x) {
+        x.classList.toggle("change")
+      }
 
-#leftmenuArea {
-	height: 5000px;
-	width: 300px;
-	background-color: #81BEF7;
-	font-family: 'Malgun Gothic', Dotum, AppleGothic, sans-serif;
-	font-size: : 20px;
-}
+      function myFunction() {
+        var input, filter, ul, li, a, i
+        input = document.getElementById("mySearch")
+        filter = input.value.toUpperCase()
+        ul = document.getElementById("myMenu")
+        li = ul.getElementsByTagName("li")
+        for (i = 0; i < li.length; i++) {
+          a = li[i].getElementsByTagName("a")[0]
+          if (a.innerHTML.toUpperCase().indexOf(filter) > -1) {
+            li[i].style.display = ""
+          } else {
+            li[i].style.display = "none"
+          }
+        }
+      }
+    </script>
+    <style>
+      .container {
+        cursor: pointer;
+        margin: 25px;
+        position: absolute;
+      }
+      .subject {
+        position: absolute;
+        left: 45%;
+      }
+      .bar1,
+      .bar2,
+      .bar3 {
+        width: 35px;
+        height: 5px;
+        background-color: #333;
+        margin: 6px 0;
+        transition: 0.4s;
+      }
 
-#outside {
-	background-color: aqua;
-	height: 500px;
-	overflow: hidden;
-}
+      .change .bar1 {
+        -webkit-transform: rotate(-45deg) translate(-9px, 6px);
+        transform: rotate(-45deg) translate(-9px, 6px);
+      }
 
-#inside {
-	background-color: lime;
-	height: 500px;
-}
-</style>
-	<script>
-		$(document).ready(function() {
-			$("#leftmenuArea").hide();
-			$("#siteMapBtn").click(function() {
-				$('#leftmenuArea').animate({
-					width : 'toggle'
-				});
-				$('#outside').show();
-				$('#inside').animate({
-					width : 'toggle'
-				});
-			})
-		})
-	</script>
-</head>
+      .change .bar2 {
+        opacity: 0;
+      }
 
-<body>
-	<header> <input type="image" id="siteMapBtn"
-		src="C:\Users\민필규\Desktop\SW마에스트로\menu.png" width="100"
-		height="100">
-		<center><h1>메인 페이지</h1></center>
-		</header>
+      .change .bar3 {
+        -webkit-transform: rotate(45deg) translate(-8px, -8px);
+        transform: rotate(45deg) translate(-8px, -8px);
+      }
+      .left {
+        flex: 35%;
+        padding: 15px 0;
+      }
 
-	<div id="leftmenuArea">
-		<h1 onclick="location.href='Main.html'">메인 페이지</h1>
-		<h1 onclick = "location.href='DetailAir.html'">상세 공기 상태</h1>
-		<h1 onclick = "location.href='DataHistory.html'">누적 데이터</h1>
-		<h1 onclick = "location.href='RemoteControl.html'">리모컨 기능</h1>
-		<h1 onclick = "location.href='ModeControl.html'">모드 설정</h1>
-	</div>
-	<div id="outside">
-		<section> </section>
-	</div>
-	<div id="inside">
-		<section > </section>
-	</div>
-</body>
+      .left h2 {
+        padding-left: 8px;
+      }
+      #mySearch {
+        width: 100%;
+        font-size: 18px;
+        padding: 11px;
+        border: 1px solid #ddd;
+      }
+
+      #myMenu {
+        list-style-type: none;
+        padding: 0;
+        margin: 0;
+        text-align: center;
+      }
+
+      #myMenu li a {
+        padding: 12px;
+        text-decoration: none;
+        color: black;
+        display: block;
+      }
+
+      #myMenu li a:hover {
+        background-color: #eee;
+      }
+      header {
+        height: 100px;
+        background-color: #81bef7;
+      }
+      html,
+      body {
+        margin: 0;
+        padding: 0;
+        border: 0;
+      }
+      #A,
+      #B {
+        position: absolute;
+      }
+      #A {
+        top: 100px;
+        width: 200px;
+        bottom: 0px;
+      }
+      #B {
+        top: 100px;
+        left: 0px;
+        right: 0;
+        bottom: 0px;
+        background: white;
+        background-image: url("house.png");
+        background-repeat: no-repeat;
+        background-size: 100%;
+      }
+    </style>
+  </head>
+
+  <body>
+    <header>
+      <div class="container" onclick="btnClick(this)" id="siteMapBtn">
+        <div class="bar1"></div>
+        <div class="bar2"></div>
+        <div class="bar3"></div>
+      </div>
+      <div class="subject">
+        <h1>메인 페이지</h1>
+      </div>
+    </header>
+    <div id="A" class="left" style="background-color:#bbb;">
+      <h2>Menu</h2>
+      <input
+        type="text"
+        id="mySearch"
+        onkeyup="myFunction()"
+        placeholder="Search.."
+        title="Type in a category"
+      />
+      <ul id="myMenu">
+        <li><a href="Main.html">메인 페이지</a></li>
+        <li><a href="Detailair.html">상세 공기 상태</a></li>
+        <li><a href="DataHistory.html">누적 데이터</a></li>
+        <li><a href="RemoteControl.html">리모컨 기능</a></li>
+        <li><a href="ModeControl.html">모드 설정</a></li>
+      </ul>
+    </div>
+    <div id="B"></div>
+  </body>
 </html>
